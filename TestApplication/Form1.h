@@ -18,6 +18,68 @@ namespace TestApplication {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
+	int index;
+	bool increaseProgressBar1 = false;
+	bool increaseProgressBar2 = false;
+
+	bool murderDoneTalking = false;
+
+	int getRandom() {
+		return (rand() % 3);
+	}
+
+
+	void retrieveMurderTableResponse(std::string currentUserInput) {
+		int responseNumber = getRandom();
+
+		if (murderDoneTalking == false) {
+			// array has not been visited before
+			// output a random response from category 3
+			if (arrayStuff::murderTableInitialized == false) {
+				arrayStuff::murderTableInitialized = true;
+				arrayStuff::mainresponse = arrayStuff::alice_MurderTable[arrayStuff::murderTableCurrentCategory][responseNumber].response;
+				arrayStuff::alice_MurderTable[arrayStuff::murderTableCurrentCategory][responseNumber].outputCount += 1;
+			}
+			else {
+				// if the user is repeating himself, penalize him
+				if (currentUserInput == arrayStuff::previousUserInput) {
+					for (int i = 0; i < 3; i++){
+						if (arrayStuff::alice_MurderTable[0][i].outputCount == 0) {
+							arrayStuff::mainresponse = arrayStuff::alice_MurderTable[0][i].response;
+							arrayStuff::alice_MurderTable[0][i].outputCount += 1;
+							increaseProgressBar2 = true;
+							break;
+						}
+						// if the user runs out of chances, he fails the Case Point
+						else if (arrayStuff::alice_MurderTable[0][i].outputCount != 0 && i == 2) {
+							arrayStuff::mainresponse = "We're done talking about this.";
+							increaseProgressBar2 = true;
+							murderDoneTalking = true;
+						}
+					}
+				}
+				else {
+					if (index == 14) {
+						arrayStuff::mainresponse = arrayStuff::alice_MurderTable[3][responseNumber].response;
+						arrayStuff::alice_MurderTable[arrayStuff::murderTableCurrentCategory][responseNumber].outputCount += 1;
+						increaseProgressBar1 = true;
+					}
+					if (index == 24) {
+						arrayStuff::mainresponse = arrayStuff::alice_MurderTable[4][responseNumber].response;
+						arrayStuff::alice_MurderTable[arrayStuff::murderTableCurrentCategory][responseNumber].outputCount += 1;
+						increaseProgressBar1 = true;
+					}
+				}
+			}
+			arrayStuff::murderTableCurrentCategory += 1;
+		
+		}
+		else if (murderDoneTalking == true) {
+			arrayStuff::mainresponse = "We're done talking about this.";
+			increaseProgressBar2 = true;
+		}
+	}
+
 		public ref class Form1 : public System::Windows::Forms::Form
 	{
 	public:
@@ -28,6 +90,7 @@ namespace TestApplication {
 			//TODO: Add the constructor code here
 			//
 			arrayStuff::build_alice_RNArray();
+			arrayStuff::build_alice_MurderTable();
 		}
 
 	protected:
@@ -191,7 +254,7 @@ namespace TestApplication {
 			this->CharmButton->Name = L"CharmButton";
 			this->CharmButton->Size = System::Drawing::Size(150, 48);
 			this->CharmButton->TabIndex = 8;
-			this->CharmButton->Text = L"Charm";
+			this->CharmButton->Text = L"Press the Issue!";
 			this->CharmButton->UseVisualStyleBackColor = true;
 			this->CharmButton->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
 			// 
@@ -253,7 +316,7 @@ namespace TestApplication {
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(260, 20);
 			this->label2->TabIndex = 14;
-			this->label2->Text = L"Submissive";
+			this->label2->Text = L"The suspect is guilty";
 			this->label2->TextAlign = System::Drawing::ContentAlignment::TopCenter;
 			// 
 			// label3
@@ -266,7 +329,7 @@ namespace TestApplication {
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(260, 20);
 			this->label3->TabIndex = 15;
-			this->label3->Text = L"Assertive";
+			this->label3->Text = L"You\'ve been outmatched";
 			this->label3->TextAlign = System::Drawing::ContentAlignment::TopCenter;
 			// 
 			// Form1
@@ -304,12 +367,18 @@ namespace TestApplication {
 #pragma endregion
 
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-			 textBox1->BackColor = System::Drawing::Color::Yellow;
+			 if (textBox1->BackColor == System::Drawing::Color::White) {
+				 textBox1->BackColor = System::Drawing::Color::Yellow;
+			 }
+			 else if (textBox1->BackColor == System::Drawing::Color::Yellow) {
+				 textBox1->BackColor = System::Drawing::Color::White;
+			 }
+			 
 		 }
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 			 textBox1->BackColor = System::Drawing::Color::Red;
 		 }
-private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {	
+private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
 			 msclr::interop::marshal_context context;
 
 			int hit = 0;
@@ -324,34 +393,51 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 			while(ss>>arrayStuff::buf){
 			tokens.push_back(arrayStuff::buf);
 			outputFile<<arrayStuff::buf+"\n";
-			arrayStuff::kwIndex = arrayStuff::compareKeywords(arrayStuff::buf);
+			arrayStuff::kwIndex = arrayStuff::compareKeywords(arrayStuff::buf, textBox1->BackColor);
+			if (arrayStuff::kwIndex >= 0) {
+				index = arrayStuff::kwIndex;
+			}
 			if (arrayStuff::kwIndex >= 0){
 				hit++;
-				arrayStuff::mainresponse = arrayStuff::alice_RNArray[arrayStuff::kwIndex][rand() % 5].responseOutput();
+				/*arrayStuff::mainresponse = arrayStuff::alice_RNArray[arrayStuff::kwIndex][rand() % 5].responseOutput();*/
 			}
 			
 		} outputFile.close();
-		if (hit == 0) arrayStuff::mainresponse = arrayStuff::noMatchResponsesArray[rand() % 5];
+		if (hit == 0) {
+			arrayStuff::mainresponse = arrayStuff::noMatchResponsesArray[rand() % 5];
+			progressBar2->Value += 10;
+		}
 		else if (hit > 1) arrayStuff::mainresponse = "One thing at a time, please.";
-		 label1->Text = msclr::interop::marshal_as<System::String^>(arrayStuff::mainresponse);
 
-			 //// If White
-			 //if (textBox1->BackColor == System::Drawing::Color::White) {
-				//textBox1->Text = "";
-				//label1->Text = msclr::interop::marshal_as<System::String^>(arrayStuff::alice_RNArray[2][0].response);
-			 //}
+			
+			if (index == 4 || index == 14 || index == 24) {
+				retrieveMurderTableResponse(context.marshal_as<std::string>(textBox1->Text));
+				label1->Text = msclr::interop::marshal_as<System::String^>(arrayStuff::mainresponse);
 
-			 //// If Yellow
-			 //if (textBox1->BackColor == System::Drawing::Color::Yellow) {
-				// if (progressBar1->Value < 100) {
-				//	 label1->Text = "chatbot response";
-				//	 textBox1->BackColor = System::Drawing::Color::White;
-				//	 progressBar1->Value += 10;
-				//}u
-				//else {
-				// label1->Text = "I'm guilty";
-				//}
-			 //}
+				if (index == 14 && increaseProgressBar1 && (increaseProgressBar2 == false)) {
+					progressBar1->Value += 10;
+					increaseProgressBar1 = false;
+				}
+				else if (index == 14 && (increaseProgressBar2 == true)) {
+					progressBar2->Value += 15;
+					increaseProgressBar2 = false;
+				}
+				else if (index == 24) {
+					progressBar1->Value += 30;
+					increaseProgressBar1 = false;
+					murderDoneTalking = true;
+				}
+			}
+
+			if (index == 100) {
+				progressBar2->Value += 30;
+			}
+
+		arrayStuff::previousUserInput = context.marshal_as<std::string>(textBox1->Text);
+		textBox1->Text = "";
+		textBox1->BackColor = System::Drawing::Color::White;
+		index = -1;
+		 
 		 }
 };
 

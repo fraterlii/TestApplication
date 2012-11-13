@@ -9,14 +9,22 @@
 
 
 namespace arrayStuff {
-	std::string x;
+	std::string previousUserInput;
 
-	std::string drugs[]={"DRUGS","POT","MARIJUANA","DOSE","DOPE","WEED","GANJA","MUSHROOM","LSD","COCAINE","COKE","HEROIN","$$$$"};
-	std::string weapons[]={"GUNS","RIFLE","RIFLES","WEAPONS","KNIFE","KNIVES","GUN","REVOLVERS","REVOLVER","SWORD","SWORDS","PISTOLS","###"};
-	std::string kidnap[]={"KIDNAP","SNATCH","/////////","@@@@","!!!!!","####","$$$$$$$","%%%%%%","^^^^^","&&&&&&","*****","((((((",")))))))"};
-	std::string murder[]={"MURDER","KILL","KILLED","SLAY","SNUFF","EXTERMINATION","ASSASSINATION","ELIMINATION","ELIMINATE","@@@@@@@@","#########","$%%%%%%%%%%%%","........."};
+	// global MurderTable values
+	bool murderTableInitialized = false;
+	int murderTableCurrentCategory = 2;
+	
+	
+	
+	
+	std::string x;
+	std::string drugs[]={"POT","MARIJUANA","DOSE","DOPE","WEED","GANJA","MUSHROOM","LSD","COCAINE","COKE","HEROIN","$$$$"};
+	std::string weapons[]={"RIFLE","RIFLES","WEAPONS","KNIFE","KNIVES","GUN","REVOLVERS","REVOLVER","SWORD","SWORDS","PISTOLS","###"};
+	std::string kidnap[]={"SNATCH","/////////","@@@@","!!!!!","####","$$$$$$$","%%%%%%","^^^^^","&&&&&&","*****","((((((",")))))))"};
+	std::string murder[]={"KILL","KILLED","SLAY","SNUFF","EXTERMINATION","**************","ELIMINATION","ELIMINATE","@@@@@@@@","#########","$%%%%%%%%%%%%","........."};
 	std::string robbery[]={"BLACKMAIL","BANDITRY","PIRACY","STEALING","STOLE","THEFT","SHOPLIFTING","BURGLARY","^^^^^^^^^","&&&&&&&&&&&","**********","!!!!!!!!!!!",")))))))))"};
-	std::string pressingIssue[]={"HEMP","PISTOL","ABDUCT","ASSASSIN","ROBBED"};
+	std::string pressingIssue[]={"HEMP","PISTOL","ABDUCT","ROBBED","ASSASSIN"};
 	std::string alice_kw_Array[] = {"DRUGS","GUNS", "KIDNAP", "ROBBERY" , "MURDER"};
 	int alice_kw_ArrayLength = sizeof(alice_kw_Array) / sizeof(std::string);
 
@@ -51,6 +59,31 @@ public:
 
 	// namespace data declarations									//how we guide the conversation is something to think about, and how he gets caught. 
 	ResponseNode alice_RNArray[30][5];
+	
+	ResponseNode alice_MurderTable[5][3];
+
+	void build_alice_MurderTable() {
+		alice_MurderTable[0][0].manualConstructor("Murder: C1, R1", 0);
+		alice_MurderTable[0][1].manualConstructor("Murder: C1, R2", 0);
+		alice_MurderTable[0][2].manualConstructor("Murder: C1, R3", 0);
+
+		alice_MurderTable[1][0].manualConstructor("Murder: C2, R1", 0);
+		alice_MurderTable[1][1].manualConstructor("Murder: C2, R2", 0);
+		alice_MurderTable[1][2].manualConstructor("Murder: C2, R3", 0);
+		
+		alice_MurderTable[2][0].manualConstructor("Murder: C3, R1", 0);
+		alice_MurderTable[2][1].manualConstructor("Murder: C3, R2", 0);
+		alice_MurderTable[2][2].manualConstructor("Murder: C3, R3", 0);
+
+		alice_MurderTable[3][0].manualConstructor("Murder: C4, R1", 0);
+		alice_MurderTable[3][1].manualConstructor("Murder: C4, R2", 0);
+		alice_MurderTable[3][2].manualConstructor("Murder: C4, R3", 0);
+		
+		alice_MurderTable[4][0].manualConstructor("Murder: C5, R1", 0);
+		alice_MurderTable[4][1].manualConstructor("Murder: C5, R2", 0);
+		alice_MurderTable[4][2].manualConstructor("Murder: C5, R3", 0);
+
+	}
 
 	void build_alice_RNArray() {
 		// Initializes each value within the alice_RNArray variable
@@ -259,37 +292,97 @@ public:
 	}
 
 
-	int compareKeywords(std::string buf) {
+	int compareKeywords(std::string buf, System::Drawing::Color tb1Background) {
 		// checks the string parameter (user input) against the string values in alice_kw_Array[]
 		// if a match is found, the index of the match is returned
 		// otherwise, a value of -1 is returned
 
-		
-			if (buf == "HINT" || buf == "QUIT") {
-				return -5;
+	
+	if (tb1Background == System::Drawing::Color::White)
+	{
+			for (int i=0; i < 5; i++)
+			{
+				if (buf == alice_kw_Array[i] && buf=="DRUGS")
+				{
+					return 0;
+				}
+
+				else if(buf == alice_kw_Array[i] && buf=="GUNS")
+				{
+					return 1;
+				}
+				else if(buf == alice_kw_Array[i] && buf=="KIDNAP")
+				{
+					return 2;
+				}
+
+				else if(buf == alice_kw_Array[i] && buf=="ROBBERY")
+				{
+					return 3;
+				}
+
+				else if(buf == alice_kw_Array[i] && buf=="MURDER")
+				{
+					return 4;
+				}
 			}
-			
-			for (int i=0; i < 13; i++){
-			/*if (buf == alice_kw_Array[i]){
-				return i;
-			}*/
-			if(uiLevenshteinDistance(drugs[i],buf)<2){			//if the uiLenevnshteinDistance is less than 2 means if the words are not similar within range of 1, its not gonna work.
-				return 0;
+
+			for (int i=0; i < 12; i++)
+			{
+				if(uiLevenshteinDistance(drugs[i],buf)<2)
+				{			
+					return 10;
+				}
+				else if(uiLevenshteinDistance(weapons[i],buf)<2)
+				{
+					return 11;
+				}
+				else if(uiLevenshteinDistance(kidnap[i],buf)<2)
+				{
+					return 12;
+				}
+				else if (uiLevenshteinDistance(robbery[i],buf)<2)
+				{
+					return 13;
+				}
+				else if (uiLevenshteinDistance(murder[i],buf)<2)
+				{
+					return 14;
+				}
 			}
-			else if(uiLevenshteinDistance(weapons[i],buf)<2){
-				return 1;
+	}
+			else if(tb1Background == System::Drawing::Color::Yellow)
+			{
+				//for(int i=0;i<5;i++){
+				if(uiLevenshteinDistance(pressingIssue[0],buf)<2)
+				{
+					return 20;
+				}
+
+				else if(uiLevenshteinDistance(pressingIssue[1],buf)<2)
+				{
+					return 21;
+				}
+
+				else if(uiLevenshteinDistance(pressingIssue[2],buf)<2)
+				{
+					return 22;
+				}
+
+				else if(uiLevenshteinDistance(pressingIssue[3],buf)<2)
+				{
+					return 23;
+				}
+
+				else if(uiLevenshteinDistance(pressingIssue[4],buf)<2)
+				{
+					return 24;
+				}
+
+				else
+					return 100;
 			}
-			else if(uiLevenshteinDistance(kidnap[i],buf)<2){
-				return 2;
-			}
-			else if (uiLevenshteinDistance(robbery[i],buf)<2){
-				return 3;
-			}
-			else if (uiLevenshteinDistance(murder[i],buf)<2){
-				return 4;
-			}
-			
-		}
+
 		return -1;
 	}
 	
