@@ -215,6 +215,14 @@ namespace TestApplication {
 	private: System::Windows::Forms::Label^  SuspectLabel;
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  label3;
+	private: System::Windows::Forms::Label^  label11;
+	private: System::Windows::Forms::Label^  label10;
+	private: System::Windows::Forms::Label^  label9;
+	private: System::Windows::Forms::Label^  label8;
+	private: System::Windows::Forms::Label^  label7;
+	private: System::Windows::Forms::Label^  label6;
+	private: System::Windows::Forms::Label^  label5;
+	private: System::Windows::Forms::Label^  label4;
 
 
 
@@ -247,9 +255,18 @@ namespace TestApplication {
 			this->SuspectLabel = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->label10 = (gcnew System::Windows::Forms::Label());
+			this->label11 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->Echevvery))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->Suspect))->BeginInit();
 			this->tabControl1->SuspendLayout();
+			this->tabPage2->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// Echevvery
@@ -316,6 +333,14 @@ namespace TestApplication {
 			// tabPage2
 			// 
 			this->tabPage2->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			this->tabPage2->Controls->Add(this->label11);
+			this->tabPage2->Controls->Add(this->label10);
+			this->tabPage2->Controls->Add(this->label9);
+			this->tabPage2->Controls->Add(this->label8);
+			this->tabPage2->Controls->Add(this->label7);
+			this->tabPage2->Controls->Add(this->label6);
+			this->tabPage2->Controls->Add(this->label5);
+			this->tabPage2->Controls->Add(this->label4);
 			this->tabPage2->Location = System::Drawing::Point(4, 34);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Size = System::Drawing::Size(192, 691);
@@ -426,6 +451,102 @@ namespace TestApplication {
 			this->label3->Text = L"You\'ve been outmatched";
 			this->label3->TextAlign = System::Drawing::ContentAlignment::TopCenter;
 			// 
+			// label4
+			// 
+			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
+			this->label4->Location = System::Drawing::Point(4, 13);
+			this->label4->Name = L"label4";
+			this->label4->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
+			this->label4->Size = System::Drawing::Size(181, 39);
+			this->label4->TabIndex = 0;
+			this->label4->Text = L"Alice Krimieux";
+			this->label4->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			// 
+			// label5
+			// 
+			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
+			this->label5->Location = System::Drawing::Point(4, 91);
+			this->label5->Name = L"label5";
+			this->label5->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
+			this->label5->Size = System::Drawing::Size(181, 39);
+			this->label5->TabIndex = 1;
+			this->label5->Text = L"Born: 02/10/1969";
+			this->label5->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			// 
+			// label6
+			// 
+			this->label6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
+			this->label6->Location = System::Drawing::Point(4, 52);
+			this->label6->Name = L"label6";
+			this->label6->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
+			this->label6->Size = System::Drawing::Size(181, 39);
+			this->label6->TabIndex = 2;
+			this->label6->Text = L"43, Female";
+			this->label6->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			// 
+			// label7
+			// 
+			this->label7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
+			this->label7->Location = System::Drawing::Point(4, 277);
+			this->label7->Name = L"label7";
+			this->label7->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
+			this->label7->Size = System::Drawing::Size(181, 39);
+			this->label7->TabIndex = 3;
+			this->label7->Text = L"Arrest Record:";
+			this->label7->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			// 
+			// label8
+			// 
+			this->label8->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
+			this->label8->Location = System::Drawing::Point(4, 316);
+			this->label8->Name = L"label8";
+			this->label8->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
+			this->label8->Size = System::Drawing::Size(181, 39);
+			this->label8->TabIndex = 4;
+			this->label8->Text = L"1. Drug Possession";
+			this->label8->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			// 
+			// label9
+			// 
+			this->label9->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
+			this->label9->Location = System::Drawing::Point(4, 355);
+			this->label9->Name = L"label9";
+			this->label9->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
+			this->label9->Size = System::Drawing::Size(181, 39);
+			this->label9->TabIndex = 5;
+			this->label9->Text = L"2. Assault with a deadly weapon";
+			this->label9->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			// 
+			// label10
+			// 
+			this->label10->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
+			this->label10->Location = System::Drawing::Point(4, 506);
+			this->label10->Name = L"label10";
+			this->label10->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
+			this->label10->Size = System::Drawing::Size(181, 39);
+			this->label10->TabIndex = 6;
+			this->label10->Text = L"Additional Info:";
+			this->label10->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			// 
+			// label11
+			// 
+			this->label11->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
+			this->label11->Location = System::Drawing::Point(4, 545);
+			this->label11->Name = L"label11";
+			this->label11->Padding = System::Windows::Forms::Padding(5, 0, 0, 0);
+			this->label11->Size = System::Drawing::Size(181, 39);
+			this->label11->TabIndex = 7;
+			this->label11->Text = L"1. Alice\'s boyfriend is a known drug dealer";
+			this->label11->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -454,6 +575,7 @@ namespace TestApplication {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->Echevvery))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->Suspect))->EndInit();
 			this->tabControl1->ResumeLayout(false);
+			this->tabPage2->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -499,10 +621,14 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 		} outputFile.close();
 		if (hit == 0) {
 			arrayStuff::mainresponse = arrayStuff::noMatchResponsesArray[rand() % 5];
+			label1->Text = msclr::interop::marshal_as<System::String^>(arrayStuff::mainresponse);
 			progressBar2->Value += 10;
 		}
-		else if (hit > 1) arrayStuff::mainresponse = "One thing at a time, please.";
-
+		else if (hit > 1){
+			arrayStuff::mainresponse = "One thing at a time, please.";
+			label1->Text = msclr::interop::marshal_as<System::String^>(arrayStuff::mainresponse);
+		}
+		else if(hit == 1){
 			if (index == 0 || index == 10 || index == 20) {
 				retrieveDrugsTableResponse(context.marshal_as<std::string>(textBox1->Text));
 				label1->Text = msclr::interop::marshal_as<System::String^>(arrayStuff::mainresponse);
@@ -559,6 +685,7 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 		textBox1->BackColor = System::Drawing::Color::White;
 		index = -1;
 		 
+		 }
 		 }
 };
 
