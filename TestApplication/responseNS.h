@@ -28,7 +28,7 @@ namespace arrayStuff {
 	std::string kidnap[]={"SNATCH","/////////","@@@@","!!!!!","####","$$$$$$$","%%%%%%","^^^^^","&&&&&&","*****","((((((",")))))))"};
 	std::string murder[]={"KILL","KILLED","SLAY","SNUFF","EXTERMINATION","**************","ELIMINATION","ELIMINATE","@@@@@@@@","#########","$%%%%%%%%%%%%","........."};
 	std::string robbery[]={"BLACKMAIL","BANDITRY","PIRACY","STEALING","STOLE","THEFT","SHOPLIFTING","BURGLARY","^^^^^^^^^","&&&&&&&&&&&","**********","!!!!!!!!!!!",")))))))))"};
-	std::string pressingIssue[]={"HEMP","PISTOL","ABDUCT","ROBBED","ASSASSIN"};
+	std::string pressingIssue[]={"DEALER","PISTOL","ABDUCT","ROBBED","ASSASSIN"};
 	std::string alice_kw_Array[] = {"DRUGS","GUNS", "KIDNAP", "ROBBERY" , "MURDER"};
 	int alice_kw_ArrayLength = sizeof(alice_kw_Array) / sizeof(std::string);
 

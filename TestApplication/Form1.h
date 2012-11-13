@@ -18,7 +18,7 @@ namespace TestApplication {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	int index;
+	int index = -100;
 	bool increaseProgressBar1 = false;
 	bool increaseProgressBar2 = false;
 
@@ -59,6 +59,22 @@ namespace TestApplication {
 					}
 				}
 				else {
+					if (index == 0){
+						for (int i = 0; i < 3; i++){
+						if (arrayStuff::alice_DrugsTable[2][i].outputCount == 0) {
+							arrayStuff::mainresponse = arrayStuff::alice_DrugsTable[2][i].response;
+							arrayStuff::alice_DrugsTable[2][i].outputCount += 1;
+							increaseProgressBar2 = true;
+							break;
+						}
+						// if the user runs out of chances, he fails the Case Point
+						else if (arrayStuff::alice_DrugsTable[2][i].outputCount != 0 && i == 2) {
+							arrayStuff::mainresponse = "We're done talking about this.";
+							increaseProgressBar2 = true;
+							drugsDoneTalking = true;
+						}
+						}
+					}
 					if (index == 10) {
 						arrayStuff::mainresponse = arrayStuff::alice_DrugsTable[3][responseNumber].response;
 						arrayStuff::alice_DrugsTable[arrayStuff::drugsTableCurrentCategory][responseNumber].outputCount += 1;
@@ -111,6 +127,22 @@ namespace TestApplication {
 					}
 				}
 				else {
+					if (index == 4){
+						for (int i = 0; i < 3; i++){
+						if (arrayStuff::alice_MurderTable[2][i].outputCount == 0) {
+							arrayStuff::mainresponse = arrayStuff::alice_MurderTable[2][i].response;
+							arrayStuff::alice_MurderTable[2][i].outputCount += 1;
+							increaseProgressBar2 = true;
+							break;
+						}
+						// if the user runs out of chances, he fails the Case Point
+						else if (arrayStuff::alice_MurderTable[2][i].outputCount != 0 && i == 2) {
+							arrayStuff::mainresponse = "We're done talking about this.";
+							increaseProgressBar2 = true;
+							murderDoneTalking = true;
+						}
+						}
+					}
 					if (index == 14) {
 						arrayStuff::mainresponse = arrayStuff::alice_MurderTable[3][responseNumber].response;
 						arrayStuff::alice_MurderTable[arrayStuff::murderTableCurrentCategory][responseNumber].outputCount += 1;
@@ -199,6 +231,7 @@ namespace TestApplication {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Form1::typeid));
 			this->Echevvery = (gcnew System::Windows::Forms::PictureBox());
 			this->Suspect = (gcnew System::Windows::Forms::PictureBox());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
@@ -222,18 +255,26 @@ namespace TestApplication {
 			// Echevvery
 			// 
 			this->Echevvery->BackColor = System::Drawing::Color::White;
+			this->Echevvery->ErrorImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"Echevvery.ErrorImage")));
+			this->Echevvery->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"Echevvery.Image")));
+			this->Echevvery->ImageLocation = L"";
 			this->Echevvery->Location = System::Drawing::Point(210, 72);
 			this->Echevvery->Name = L"Echevvery";
 			this->Echevvery->Size = System::Drawing::Size(535, 495);
+			this->Echevvery->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->Echevvery->TabIndex = 0;
 			this->Echevvery->TabStop = false;
 			// 
 			// Suspect
 			// 
 			this->Suspect->BackColor = System::Drawing::Color::White;
+			this->Suspect->ErrorImage = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"Suspect.ErrorImage")));
+			this->Suspect->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"Suspect.Image")));
+			this->Suspect->ImageLocation = L"";
 			this->Suspect->Location = System::Drawing::Point(751, 72);
 			this->Suspect->Name = L"Suspect";
 			this->Suspect->Size = System::Drawing::Size(535, 495);
+			this->Suspect->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->Suspect->TabIndex = 2;
 			this->Suspect->TabStop = false;
 			// 
@@ -479,6 +520,10 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 					increaseProgressBar1 = false;
 					drugsDoneTalking = true;
 				}
+				else if (index == 0 && (increaseProgressBar2 == true)) {
+					progressBar2->Value += 10;
+					increaseProgressBar2 = false;
+				}
 			}
 
 			
@@ -498,6 +543,10 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 					progressBar1->Value += 30;
 					increaseProgressBar1 = false;
 					murderDoneTalking = true;
+				}
+				else if (index == 4 && (increaseProgressBar2 == true)) {
+					progressBar2->Value += 10;
+					increaseProgressBar2 = false;
 				}
 			}
 
