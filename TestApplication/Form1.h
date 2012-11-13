@@ -23,9 +23,61 @@ namespace TestApplication {
 	bool increaseProgressBar2 = false;
 
 	bool murderDoneTalking = false;
+	bool drugsDoneTalking = false;
 
 	int getRandom() {
 		return (rand() % 3);
+	}
+
+	void retrieveDrugsTableResponse(std::string currentUserInput) {
+		int responseNumber = getRandom();
+
+		if (drugsDoneTalking == false) {
+			// array has not been visited before
+			// output a random response from category 3
+			if (arrayStuff::drugsTableInitialized == false) {
+				arrayStuff::drugsTableInitialized = true;
+				arrayStuff::mainresponse = arrayStuff::alice_DrugsTable[arrayStuff::drugsTableCurrentCategory][responseNumber].response;
+				arrayStuff::alice_DrugsTable[arrayStuff::drugsTableCurrentCategory][responseNumber].outputCount += 1;
+			}
+			else {
+				// if the user is repeating himself, penalize him
+				if (currentUserInput == arrayStuff::previousUserInput) {
+					for (int i = 0; i < 3; i++){
+						if (arrayStuff::alice_DrugsTable[0][i].outputCount == 0) {
+							arrayStuff::mainresponse = arrayStuff::alice_DrugsTable[0][i].response;
+							arrayStuff::alice_DrugsTable[0][i].outputCount += 1;
+							increaseProgressBar2 = true;
+							break;
+						}
+						// if the user runs out of chances, he fails the Case Point
+						else if (arrayStuff::alice_DrugsTable[0][i].outputCount != 0 && i == 2) {
+							arrayStuff::mainresponse = "We're done talking about this.";
+							increaseProgressBar2 = true;
+							drugsDoneTalking = true;
+						}
+					}
+				}
+				else {
+					if (index == 10) {
+						arrayStuff::mainresponse = arrayStuff::alice_DrugsTable[3][responseNumber].response;
+						arrayStuff::alice_DrugsTable[arrayStuff::drugsTableCurrentCategory][responseNumber].outputCount += 1;
+						increaseProgressBar1 = true;
+					}
+					if (index == 20) {
+						arrayStuff::mainresponse = arrayStuff::alice_DrugsTable[4][responseNumber].response;
+						arrayStuff::alice_DrugsTable[arrayStuff::drugsTableCurrentCategory][responseNumber].outputCount += 1;
+						increaseProgressBar1 = true;
+					}
+				}
+			}
+			arrayStuff::drugsTableCurrentCategory += 1;
+		
+		}
+		else if (drugsDoneTalking == true) {
+			arrayStuff::mainresponse = "We're done talking about this.";
+			increaseProgressBar2 = true;
+		}
 	}
 
 
@@ -91,6 +143,7 @@ namespace TestApplication {
 			//
 			arrayStuff::build_alice_RNArray();
 			arrayStuff::build_alice_MurderTable();
+			arrayStuff::build_alice_DrugsTable();
 		}
 
 	protected:
@@ -408,6 +461,25 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 			progressBar2->Value += 10;
 		}
 		else if (hit > 1) arrayStuff::mainresponse = "One thing at a time, please.";
+
+			if (index == 0 || index == 10 || index == 20) {
+				retrieveDrugsTableResponse(context.marshal_as<std::string>(textBox1->Text));
+				label1->Text = msclr::interop::marshal_as<System::String^>(arrayStuff::mainresponse);
+
+				if (index == 10 && increaseProgressBar1 && (increaseProgressBar2 == false)) {
+					progressBar1->Value += 10;
+					increaseProgressBar1 = false;
+				}
+				else if (index == 10 && (increaseProgressBar2 == true)) {
+					progressBar2->Value += 15;
+					increaseProgressBar2 = false;
+				}
+				else if (index == 20) {
+					progressBar1->Value += 30;
+					increaseProgressBar1 = false;
+					drugsDoneTalking = true;
+				}
+			}
 
 			
 			if (index == 4 || index == 14 || index == 24) {
