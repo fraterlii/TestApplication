@@ -91,27 +91,28 @@ public:
 	}
 
 	void build_alice_MurderTable() {
-		alice_MurderTable[0][0].manualConstructor("Murder: C1, R1", 0);
-		alice_MurderTable[0][1].manualConstructor("Murder: C1, R2", 0);
-		alice_MurderTable[0][2].manualConstructor("Murder: C1, R3", 0);
+		alice_MurderTable[0][0].manualConstructor("This conversation is now over.", 0);
+		alice_MurderTable[0][1].manualConstructor("I would like to see my lawyer. I'm done with this.", 0);
+		alice_MurderTable[0][2].manualConstructor("Officer, I can't talk to you anymore by the way you are talking to me.", 0);
 
-		alice_MurderTable[1][0].manualConstructor("Murder: C2, R1", 0);
-		alice_MurderTable[1][1].manualConstructor("Murder: C2, R2", 0);
-		alice_MurderTable[1][2].manualConstructor("Murder: C2, R3", 0);
+		alice_MurderTable[1][0].manualConstructor("No way, it wasn't me.", 0);
+		alice_MurderTable[1][1].manualConstructor("How could one get into that.", 0);
+		alice_MurderTable[1][2].manualConstructor("Officer, do I look like a psycho to you.", 0);
 		
-		alice_MurderTable[2][0].manualConstructor("Murder: C3, R1", 0);
-		alice_MurderTable[2][1].manualConstructor("Murder: C3, R2", 0);
-		alice_MurderTable[2][2].manualConstructor("Murder: C3, R3", 0);
+		alice_MurderTable[2][0].manualConstructor("Murder!! What are you talking about", 0);
+		alice_MurderTable[2][1].manualConstructor("Officer I am telling you I have nothing to do with it.", 0);
+		alice_MurderTable[2][2].manualConstructor("I'm not a murderer", 0);
 
-		alice_MurderTable[3][0].manualConstructor("Murder: C4, R1", 0);
-		alice_MurderTable[3][1].manualConstructor("Murder: C4, R2", 0);
-		alice_MurderTable[3][2].manualConstructor("Murder: C4, R3", 0);
+		alice_MurderTable[3][0].manualConstructor("Murder and me. Who gave you such information.", 0);
+		alice_MurderTable[3][1].manualConstructor("I'm into hunting but not murdering people.", 0);
+		alice_MurderTable[3][2].manualConstructor("I don't want to talk anything about murder.", 0);
 		
-		alice_MurderTable[4][0].manualConstructor("Murder: C5, R1", 0);
-		alice_MurderTable[4][1].manualConstructor("Murder: C5, R2", 0);
-		alice_MurderTable[4][2].manualConstructor("Murder: C5, R3", 0);
+		alice_MurderTable[4][0].manualConstructor("I was involved in kidnapping but not murder.", 0);
+		alice_MurderTable[4][1].manualConstructor("I did kill him.", 0);
+		alice_MurderTable[4][2].manualConstructor("My family got murdered. What option do you think I had?", 0);
 
 	}
+
 
 	void build_alice_RNArray() {
 		// Initializes each value within the alice_RNArray variable
