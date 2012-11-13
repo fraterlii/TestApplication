@@ -11,12 +11,12 @@
 namespace arrayStuff {
 	std::string x;
 
-	std::string drugs[]={"DRUGS","POT","MARIJUANA","DOSE","DOPE","WEED","GANJA","HEMP","MUSHROOM","LSD","COCAINE","COKE","HEROIN"};
-	std::string weapons[]={"GUNS","RIFLE","RIFLES","WEAPONS","KNIFE","KNIVES","GUN","REVOLVERS","REVOLVER","SWORD","SWORDS","PISTOLS","PISTOL"};
-	std::string kidnap[]={"KIDNAP","ABDUCT","SNATCH","@@@@","!!!!!","####","$$$$$$$","%%%%%%","^^^^^","&&&&&&","*****","((((((",")))))))"};
-	std::string murder[]={"MURDER","KILL","KILLED","SLAY","SNUFF","EXTERMINATION","ASSASSINATION","ELIMINATION","~~~~~~","!!!!!!","@@@@@@@@","#########","$%%%%%%%%%%%%"};
+	std::string drugs[]={"DRUGS","POT","MARIJUANA","DOSE","DOPE","WEED","GANJA","MUSHROOM","LSD","COCAINE","COKE","HEROIN","$$$$"};
+	std::string weapons[]={"GUNS","RIFLE","RIFLES","WEAPONS","KNIFE","KNIVES","GUN","REVOLVERS","REVOLVER","SWORD","SWORDS","PISTOLS","###"};
+	std::string kidnap[]={"KIDNAP","SNATCH","/////////","@@@@","!!!!!","####","$$$$$$$","%%%%%%","^^^^^","&&&&&&","*****","((((((",")))))))"};
+	std::string murder[]={"MURDER","KILL","KILLED","SLAY","SNUFF","EXTERMINATION","ASSASSINATION","ELIMINATION","ELIMINATE","@@@@@@@@","#########","$%%%%%%%%%%%%","........."};
 	std::string robbery[]={"BLACKMAIL","BANDITRY","PIRACY","STEALING","STOLE","THEFT","SHOPLIFTING","BURGLARY","^^^^^^^^^","&&&&&&&&&&&","**********","!!!!!!!!!!!",")))))))))"};
-	
+	std::string pressingIssue[]={"HEMP","PISTOL","ABDUCT","ASSASSIN","ROBBED"};
 	std::string alice_kw_Array[] = {"DRUGS","GUNS", "KIDNAP", "ROBBERY" , "MURDER"};
 	int alice_kw_ArrayLength = sizeof(alice_kw_Array) / sizeof(std::string);
 
@@ -50,52 +50,169 @@ public:
 };
 
 	// namespace data declarations									//how we guide the conversation is something to think about, and how he gets caught. 
-	ResponseNode alice_RNArray[6][5];
+	ResponseNode alice_RNArray[30][5];
 
 	void build_alice_RNArray() {
 		// Initializes each value within the alice_RNArray variable
 
-		// DRUGS
+		// DRUGS0
 		alice_RNArray[0][0].manualConstructor("What drugs?", 0);
 		alice_RNArray[0][1].manualConstructor("I don't do drugs.", 0);
 		alice_RNArray[0][2].manualConstructor("What exactly are you accusing me of?", 0);
-		alice_RNArray[0][3].manualConstructor("I don't know what you're talking about, and I'm not saying another word.", 0);
-		alice_RNArray[0][4].manualConstructor("I might have had a hit before driving, but it's nothing major...", 0);
 
-		// GUNS
+		// GUNS0
 		alice_RNArray[1][0].manualConstructor("What guns?", 0);
 		alice_RNArray[1][1].manualConstructor("I don't own any guns.", 0);
 		alice_RNArray[1][2].manualConstructor("What exactly are you accusing me of?", 0);
-		alice_RNArray[1][3].manualConstructor("I have a right to silence...\n       I'm not answering any more questions.", 0);
-		alice_RNArray[1][4].manualConstructor("It's my boyfriend's car!\n       I'm not responsible for anything you found in there!", 0);
-
-		// KIDNAP
+		
+		// KIDNAP0
 		alice_RNArray[2][0].manualConstructor("WHAT?!...\n       A KIDNAPPING?!\n       Clay said that kid was his nephew!", 0);
 		alice_RNArray[2][1].manualConstructor("How could you even...\n       I would NEVER do something like that!", 0);
 		alice_RNArray[2][2].manualConstructor("Who do you think I am?\n       What do you think you're accusing me of officer?", 0);
-		alice_RNArray[2][3].manualConstructor("I don't have to listen to this anymore!\n       I'm done talking to you.", 0);
-		alice_RNArray[2][4].manualConstructor("Honestly, officer, I would never do that.\n       I swear to you, I don't know anything about a kidnapping.", 0);
-
-		// Robbery
+		
+		// ROBBERY0
 		alice_RNArray[3][0].manualConstructor("I was not involved in that Bank robbery on 1st National Bank.", 0);
 		alice_RNArray[3][1].manualConstructor("I am a working class citizen of this country, i don't rob people.", 0);
 		alice_RNArray[3][2].manualConstructor("What?, me a robber, no way.", 0);
-		alice_RNArray[3][3].manualConstructor("I have nothing to do with no robbery.", 0);
-		alice_RNArray[3][4].manualConstructor("Why are you asking me? I didn't do anything.", 0);
+		
 
-		//MURDER
+		//MURDER0
 		alice_RNArray[4][0].manualConstructor("Don't accuse me of Murder.", 0);
 		alice_RNArray[4][1].manualConstructor("I am a good man, I don't kill people.", 0);
 		alice_RNArray[4][2].manualConstructor("What?, me a murdered, no way.", 0);
-		alice_RNArray[4][3].manualConstructor("I had nothing to do with that.", 0);
-		alice_RNArray[4][4].manualConstructor("Why are you asking me? I was out of town when he was killed.", 0);
+		
+		// DRUGS1
+		alice_RNArray[5][0].manualConstructor("What drugs?", 0);
+		alice_RNArray[5][1].manualConstructor("I don't do drugs.", 0);
+		alice_RNArray[5][2].manualConstructor("What exactly are you accusing me of?", 0);
+
+		// GUNS1
+		alice_RNArray[6][0].manualConstructor("What guns?", 0);
+		alice_RNArray[6][1].manualConstructor("I don't own any guns.", 0);
+		alice_RNArray[6][2].manualConstructor("What exactly are you accusing me of?", 0);
+		
+		// KIDNAP1
+		alice_RNArray[7][0].manualConstructor("WHAT?!...\n       A KIDNAPPING?!\n       Clay said that kid was his nephew!", 0);
+		alice_RNArray[7][1].manualConstructor("How could you even...\n       I would NEVER do something like that!", 0);
+		alice_RNArray[7][2].manualConstructor("Who do you think I am?\n       What do you think you're accusing me of officer?", 0);
+		
+		// ROBBERY1
+		alice_RNArray[8][0].manualConstructor("I was not involved in that Bank robbery on 1st National Bank.", 0);
+		alice_RNArray[8][1].manualConstructor("I am a working class citizen of this country, i don't rob people.", 0);
+		alice_RNArray[8][2].manualConstructor("What?, me a robber, no way.", 0);
+		
+
+		//MURDER1
+		alice_RNArray[9][0].manualConstructor("Don't accuse me of Murder.", 0);
+		alice_RNArray[9][1].manualConstructor("I am a good man, I don't kill people.", 0);
+		alice_RNArray[9][2].manualConstructor("What?, me a murdered, no way.", 0);
+
+		// DRUGS2
+		alice_RNArray[10][0].manualConstructor("What drugs?", 0);
+		alice_RNArray[10][1].manualConstructor("I don't do drugs.", 0);
+		alice_RNArray[10][2].manualConstructor("What exactly are you accusing me of?", 0);
+
+		// GUNS2
+		alice_RNArray[11][0].manualConstructor("What guns?", 0);
+		alice_RNArray[11][1].manualConstructor("I don't own any guns.", 0);
+		alice_RNArray[11][2].manualConstructor("What exactly are you accusing me of?", 0);
+		
+		// KIDNAP2
+		alice_RNArray[12][0].manualConstructor("WHAT?!...\n       A KIDNAPPING?!\n       Clay said that kid was his nephew!", 0);
+		alice_RNArray[12][1].manualConstructor("How could you even...\n       I would NEVER do something like that!", 0);
+		alice_RNArray[12][2].manualConstructor("Who do you think I am?\n       What do you think you're accusing me of officer?", 0);
+		
+		// ROBBERY2
+		alice_RNArray[13][0].manualConstructor("I was not involved in that Bank robbery on 1st National Bank.", 0);
+		alice_RNArray[13][1].manualConstructor("I am a working class citizen of this country, i don't rob people.", 0);
+		alice_RNArray[13][2].manualConstructor("What?, me a robber, no way.", 0);
+		
+
+		//MURDER2
+		alice_RNArray[14][0].manualConstructor("Don't accuse me of Murder.", 0);
+		alice_RNArray[14][1].manualConstructor("I am a good man, I don't kill people.", 0);
+		alice_RNArray[14][2].manualConstructor("What?, me a murdered, no way.", 0);
+
+		// DRUGS3
+		alice_RNArray[15][0].manualConstructor("What drugs?", 0);
+		alice_RNArray[15][1].manualConstructor("I don't do drugs.", 0);
+		alice_RNArray[15][2].manualConstructor("What exactly are you accusing me of?", 0);
+
+		// GUNS3
+		alice_RNArray[16][0].manualConstructor("What guns?", 0);
+		alice_RNArray[16][1].manualConstructor("I don't own any guns.", 0);
+		alice_RNArray[16][2].manualConstructor("What exactly are you accusing me of?", 0);
+		
+		// KIDNAP3
+		alice_RNArray[17][0].manualConstructor("WHAT?!...\n       A KIDNAPPING?!\n       Clay said that kid was his nephew!", 0);
+		alice_RNArray[17][1].manualConstructor("How could you even...\n       I would NEVER do something like that!", 0);
+		alice_RNArray[17][2].manualConstructor("Who do you think I am?\n       What do you think you're accusing me of officer?", 0);
+		
+		// ROBBERY3
+		alice_RNArray[18][0].manualConstructor("I was not involved in that Bank robbery on 1st National Bank.", 0);
+		alice_RNArray[18][1].manualConstructor("I am a working class citizen of this country, i don't rob people.", 0);
+		alice_RNArray[18][2].manualConstructor("What?, me a robber, no way.", 0);
+		
+
+		//MURDER3
+		alice_RNArray[19][0].manualConstructor("Don't accuse me of Murder.", 0);
+		alice_RNArray[19][1].manualConstructor("I am a good man, I don't kill people.", 0);
+		alice_RNArray[19][2].manualConstructor("What?, me a murdered, no way.", 0);
+
+		// DRUGS4
+		alice_RNArray[20][0].manualConstructor("What drugs?", 0);
+		alice_RNArray[20][1].manualConstructor("I don't do drugs.", 0);
+		alice_RNArray[20][2].manualConstructor("What exactly are you accusing me of?", 0);
+
+		// GUNS4
+		alice_RNArray[21][0].manualConstructor("What guns?", 0);
+		alice_RNArray[21][1].manualConstructor("I don't own any guns.", 0);
+		alice_RNArray[21][2].manualConstructor("What exactly are you accusing me of?", 0);
+		
+		// KIDNAP4
+		alice_RNArray[22][0].manualConstructor("WHAT?!...\n       A KIDNAPPING?!\n       Clay said that kid was his nephew!", 0);
+		alice_RNArray[22][1].manualConstructor("How could you even...\n       I would NEVER do something like that!", 0);
+		alice_RNArray[22][2].manualConstructor("Who do you think I am?\n       What do you think you're accusing me of officer?", 0);
+		
+		// ROBBERY4
+		alice_RNArray[23][0].manualConstructor("I was not involved in that Bank robbery on 1st National Bank.", 0);
+		alice_RNArray[23][1].manualConstructor("I am a working class citizen of this country, i don't rob people.", 0);
+		alice_RNArray[23][2].manualConstructor("What?, me a robber, no way.", 0);
+		
+
+		//MURDER4
+		alice_RNArray[24][0].manualConstructor("Don't accuse me of Murder.", 0);
+		alice_RNArray[24][1].manualConstructor("I am a good man, I don't kill people.", 0);
+		alice_RNArray[24][2].manualConstructor("What?, me a murdered, no way.", 0);
+
+		// DRUGSPressIssue
+		alice_RNArray[25][0].manualConstructor("What drugs?", 0);
+		alice_RNArray[25][1].manualConstructor("I don't do drugs.", 0);
+		alice_RNArray[25][2].manualConstructor("What exactly are you accusing me of?", 0);
+
+		// GUNSPressIssue
+		alice_RNArray[26][0].manualConstructor("What guns?", 0);
+		alice_RNArray[26][1].manualConstructor("I don't own any guns.", 0);
+		alice_RNArray[26][2].manualConstructor("What exactly are you accusing me of?", 0);
+		
+		// KIDNAPPressIssue
+		alice_RNArray[27][0].manualConstructor("WHAT?!...\n       A KIDNAPPING?!\n       Clay said that kid was his nephew!", 0);
+		alice_RNArray[27][1].manualConstructor("How could you even...\n       I would NEVER do something like that!", 0);
+		alice_RNArray[27][2].manualConstructor("Who do you think I am?\n       What do you think you're accusing me of officer?", 0);
+		
+		// ROBBERYPressIssue
+		alice_RNArray[28][0].manualConstructor("I was not involved in that Bank robbery on 1st National Bank.", 0);
+		alice_RNArray[28][1].manualConstructor("I am a working class citizen of this country, i don't rob people.", 0);
+		alice_RNArray[28][2].manualConstructor("What?, me a robber, no way.", 0);
+		
+
+		//MURDERPressIssue
+		alice_RNArray[29][0].manualConstructor("Don't accuse me of Murder.", 0);
+		alice_RNArray[29][1].manualConstructor("I am a good man, I don't kill people.", 0);
+		alice_RNArray[29][2].manualConstructor("What?, me a murdered, no way.", 0);
+
+
 	
-		//Terrorism
-		alice_RNArray[5][0].manualConstructor("I am not a terrorist, I love this country.", 0);
-		alice_RNArray[5][1].manualConstructor("Just because I look like this, doesn't mean I am a terrorist.", 0);
-		alice_RNArray[5][2].manualConstructor("What? A terrorist, no way i am a peaceful person.", 0);
-		alice_RNArray[5][3].manualConstructor("I wasn't involved, nor did I know anything about this incident.", 0);
-		alice_RNArray[5][4].manualConstructor("I was only carrying that stuff,but I didn't know what was there. You can't just accuse me like that.", 0);
 
 	}
 
