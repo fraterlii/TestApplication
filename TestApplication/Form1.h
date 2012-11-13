@@ -1,4 +1,13 @@
 #pragma once
+#include "responseNS.h"
+#include <msclr/marshal_cppstd.h>
+#include <iostream>
+#include <string>
+#include <stdlib.h>
+#include <time.h>
+#include <fstream>
+#include <sstream>
+#include <vector>
 
 namespace TestApplication {
 
@@ -9,10 +18,7 @@ namespace TestApplication {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for Form1
-	/// </summary>
-	public ref class Form1 : public System::Windows::Forms::Form
+		public ref class Form1 : public System::Windows::Forms::Form
 	{
 	public:
 		Form1(void)
@@ -21,6 +27,7 @@ namespace TestApplication {
 			//
 			//TODO: Add the constructor code here
 			//
+			arrayStuff::build_alice_RNArray();
 		}
 
 	protected:
@@ -49,7 +56,7 @@ namespace TestApplication {
 	private: System::Windows::Forms::ProgressBar^  progressBar1;
 	private: System::Windows::Forms::ProgressBar^  progressBar2;
 	private: System::Windows::Forms::Button^  CharmButton;
-	private: System::Windows::Forms::Button^  IntimidateButton;
+
 	private: System::Windows::Forms::Button^  ContinueButton;
 
 
@@ -85,7 +92,6 @@ namespace TestApplication {
 			this->progressBar1 = (gcnew System::Windows::Forms::ProgressBar());
 			this->progressBar2 = (gcnew System::Windows::Forms::ProgressBar());
 			this->CharmButton = (gcnew System::Windows::Forms::Button());
-			this->IntimidateButton = (gcnew System::Windows::Forms::Button());
 			this->ContinueButton = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->EchevveryLabel = (gcnew System::Windows::Forms::Label());
@@ -117,6 +123,7 @@ namespace TestApplication {
 			// 
 			// textBox1
 			// 
+			this->textBox1->BackColor = System::Drawing::Color::White;
 			this->textBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(0)));
 			this->textBox1->Location = System::Drawing::Point(210, 573);
@@ -124,7 +131,6 @@ namespace TestApplication {
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(535, 114);
 			this->textBox1->TabIndex = 3;
-			this->textBox1->TextChanged += gcnew System::EventHandler(this, &Form1::textBox1_TextChanged);
 			// 
 			// tabControl1
 			// 
@@ -188,18 +194,6 @@ namespace TestApplication {
 			this->CharmButton->Text = L"Charm";
 			this->CharmButton->UseVisualStyleBackColor = true;
 			this->CharmButton->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
-			// 
-			// IntimidateButton
-			// 
-			this->IntimidateButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11.25F, System::Drawing::FontStyle::Regular, 
-				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->IntimidateButton->Location = System::Drawing::Point(361, 690);
-			this->IntimidateButton->Name = L"IntimidateButton";
-			this->IntimidateButton->Size = System::Drawing::Size(150, 48);
-			this->IntimidateButton->TabIndex = 9;
-			this->IntimidateButton->Text = L"Intimidate";
-			this->IntimidateButton->UseVisualStyleBackColor = true;
-			this->IntimidateButton->Click += gcnew System::EventHandler(this, &Form1::button2_Click);
 			// 
 			// ContinueButton
 			// 
@@ -287,7 +281,6 @@ namespace TestApplication {
 			this->Controls->Add(this->EchevveryLabel);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->ContinueButton);
-			this->Controls->Add(this->IntimidateButton);
 			this->Controls->Add(this->CharmButton);
 			this->Controls->Add(this->progressBar2);
 			this->Controls->Add(this->progressBar1);
@@ -309,14 +302,6 @@ namespace TestApplication {
 
 		}
 #pragma endregion
-	
-private: System::Void textBox1_TextChanged(System::Object^  sender, System::EventArgs^  e) {
-
-			 }
-
-private: System::Void textBox2_TextChanged(System::Object^  sender, System::EventArgs^  e) {
-
-		 }
 
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 			 textBox1->BackColor = System::Drawing::Color::Yellow;
@@ -324,49 +309,76 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 			 textBox1->BackColor = System::Drawing::Color::Red;
 		 }
-private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
-			 /*int framedelay = 100;
-			 int count = 0;
-			 
-			 for (int framecount = 0; framecount < 10; count++){
-				 if (count > framedelay){
-					 count = 0;
-					 framecount++;
-					 if (framecount%2 == 0) Echevvery->BackColor = System::Drawing::Color::Red;
-					 else Echevvery->BackColor = System::Drawing::Color::Blue;
-				 }
-			 }
-			 
-			 textBox1->BackColor = System::Drawing::Color::White;*/
-			 
-			 
-			 if (textBox1->BackColor == System::Drawing::Color::White) {
-				textBox1->Text = "";
-				label1->Text = "chatbot response";
-			 }
+private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {	
+			 msclr::interop::marshal_context context;
 
-			 if (textBox1->BackColor == System::Drawing::Color::Yellow) {
-				 if (progressBar1->Value < 100) {
-					 label1->Text = "chatbot response";
-					 textBox1->BackColor = System::Drawing::Color::White;
-					 progressBar1->Value += 10;
-				}
-				else {
-				 label1->Text = "I'm guilty";
-				}
-			 }
+			int hit = 0;
+			arrayStuff::keywords = arrayStuff::input2UPPER(context.marshal_as<std::string>(textBox1->Text));
+			std::string x = arrayStuff::keywords;
+			std::stringstream ss(arrayStuff::keywords);
+			std::vector<std::string> tokens;
+			std::ofstream outputFile;
+			outputFile.open("datafile.txt");
+			arrayStuff::mainresponse = "";
 
-			if (textBox1->BackColor == System::Drawing::Color::Red) {
-				if (progressBar2->Value < 100) {
-					label1->Text = "chatbot response";
-					textBox1->BackColor = System::Drawing::Color::White;
-					progressBar2->Value += 10;
-				}
-				else {
-				 label1->Text = "I'd like to see my attorney";
-				}
+			while(ss>>arrayStuff::buf){
+			tokens.push_back(arrayStuff::buf);
+			outputFile<<arrayStuff::buf+"\n";
+			arrayStuff::kwIndex = arrayStuff::compareKeywords(arrayStuff::buf);
+			if (arrayStuff::kwIndex >= 0){
+				hit++;
+				arrayStuff::mainresponse = arrayStuff::alice_RNArray[arrayStuff::kwIndex][rand() % 5].responseOutput();
 			}
+			
+		} outputFile.close();
+		if (hit == 0) arrayStuff::mainresponse = arrayStuff::noMatchResponsesArray[rand() % 5];
+		else if (hit > 1) arrayStuff::mainresponse = "One thing at a time, please.";
+		 label1->Text = msclr::interop::marshal_as<System::String^>(arrayStuff::mainresponse);
+
+			 //// If White
+			 //if (textBox1->BackColor == System::Drawing::Color::White) {
+				//textBox1->Text = "";
+				//label1->Text = msclr::interop::marshal_as<System::String^>(arrayStuff::alice_RNArray[2][0].response);
+			 //}
+
+			 //// If Yellow
+			 //if (textBox1->BackColor == System::Drawing::Color::Yellow) {
+				// if (progressBar1->Value < 100) {
+				//	 label1->Text = "chatbot response";
+				//	 textBox1->BackColor = System::Drawing::Color::White;
+				//	 progressBar1->Value += 10;
+				//}u
+				//else {
+				// label1->Text = "I'm guilty";
+				//}
+			 //}
 		 }
 };
+
 }
 
+//		int hit = 0;
+//		keywords = input2Upper(textBox1->Text);
+//		stringstream ss(keywords);
+//		vector<string> tokens;
+//		ofstream outputFile;
+//		outputFile.open("datafile.txt");
+//		mainresponse = "";
+//
+//
+//		while(ss>>buf){
+//			tokens.push_back(buf);
+//			outputFile<<buf+"\n";
+//			kwIndex = compareKeywords(buf);
+//			if (kwIndex >= 0){
+//				hit++;
+//				mainresponse = alice_RNArray[kwIndex][rand() % 5].responseOutput();
+//			}
+//			
+//		} outputFile.close();
+//		if (hit == 0) mainresponse = noMatchResponsesArray[rand() % 5];
+//		else if (hit > 1) mainresponse = "One thing at a time, please.";
+//		cout << "Alice: " << mainresponse << endl << endl;
+//
+//	}while (running(buf));
+//	

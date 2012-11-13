@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.ico" />
+    <None Include="datafile.txt" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +99,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="responseNS.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
