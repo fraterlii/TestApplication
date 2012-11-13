@@ -68,25 +68,25 @@ public:
 	ResponseNode alice_DrugsTable[5][3];
 
 	void build_alice_DrugsTable() {
-		alice_DrugsTable[0][0].manualConstructor("Drugs: C1, R1", 0);
-		alice_DrugsTable[0][1].manualConstructor("Drugs: C1, R2", 0);
-		alice_DrugsTable[0][2].manualConstructor("Drugs: C1, R3", 0);
+		alice_DrugsTable[0][0].manualConstructor("I can't believe you are accusing me of this. I had nothing to do with drugs.", 0);
+		alice_DrugsTable[0][1].manualConstructor("We're done talking about this.", 0);
+		alice_DrugsTable[0][2].manualConstructor("I want to see my lawyer.", 0);
 
-		alice_DrugsTable[1][0].manualConstructor("Drugs: C2, R1", 0);
-		alice_DrugsTable[1][1].manualConstructor("Drugs: C2, R2", 0);
-		alice_DrugsTable[1][2].manualConstructor("Drugs: C2, R3", 0);
+		alice_DrugsTable[1][0].manualConstructor("I'm not a dope-head.", 0);
+		alice_DrugsTable[1][1].manualConstructor("I'm telling you, I've never seen those drugs. That's not even my car.", 0);
+		alice_DrugsTable[1][2].manualConstructor("You can't prove anything.", 0);
 		
-		alice_DrugsTable[2][0].manualConstructor("Drugs: C3, R1", 0);
-		alice_DrugsTable[2][1].manualConstructor("Drugs: C3, R2", 0);
-		alice_DrugsTable[2][2].manualConstructor("Drugs: C3, R3", 0);
+		alice_DrugsTable[2][0].manualConstructor("What drugs?", 0);
+		alice_DrugsTable[2][1].manualConstructor("You think I an addict?", 0);
+		alice_DrugsTable[2][2].manualConstructor("No way. I don't do drugs.", 0);
 
-		alice_DrugsTable[3][0].manualConstructor("Drugs: C4, R1", 0);
-		alice_DrugsTable[3][1].manualConstructor("Drugs: C4, R2", 0);
-		alice_DrugsTable[3][2].manualConstructor("Drugs: C4, R3", 0);
+		alice_DrugsTable[3][0].manualConstructor("I used to be into that stuff, but I swear I've been clean.", 0);
+		alice_DrugsTable[3][1].manualConstructor("I was just holding it for a friend.", 0);
+		alice_DrugsTable[3][2].manualConstructor("I don't know where the hell that came from.", 0);
 		
-		alice_DrugsTable[4][0].manualConstructor("Drugs: C5, R1", 0);
-		alice_DrugsTable[4][1].manualConstructor("Drugs: C5, R2", 0);
-		alice_DrugsTable[4][2].manualConstructor("Drugs: C5, R3", 0);
+		alice_DrugsTable[4][0].manualConstructor("I admit it. The drugs were mine.", 0);
+		alice_DrugsTable[4][1].manualConstructor("I've been trying to quit, but I slipped up.", 0);
+		alice_DrugsTable[4][2].manualConstructor("You don't understand. You've never been addicted like I am.", 0);
 
 	}
 
